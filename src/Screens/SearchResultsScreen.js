@@ -40,7 +40,9 @@ const SearchResultsScreen = ({ route, navigation }) => {
   };
 
   const renderItem = ({ item }) => (
+    
     <View style={styles.item}>
+      
       <Image source={{ uri: item.imageUrl }} style={styles.image} />
       <View style={{ flex: 1 }}>
         <Text style={styles.name}>{item.dish}</Text>
@@ -63,6 +65,7 @@ const SearchResultsScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={{color:"white",marginTop:30,fontSize:30,marginBottom:10,}}>Search Results..</Text>
       {results.length === 0 ? (
         <Text style={styles.noResults}>No results found</Text>
       ) : (
