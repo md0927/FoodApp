@@ -1,5 +1,6 @@
-import { ScrollView, Dimensions } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
+
+import { ScrollView, Dimensions, Image } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -21,7 +22,7 @@ const AutoScrollCarousel = () => {
       const nextIndex = (currentIndex + 1) % images.length;
       scrollRef.current?.scrollTo({ x: nextIndex * width, animated: true });
       setCurrentIndex(nextIndex);
-    }, 3000); // 3-second interval
+    }, 1000); // 3-second interval
 
     return () => clearInterval(interval);
   }, [currentIndex, images.length]);
@@ -47,3 +48,5 @@ const AutoScrollCarousel = () => {
     </ScrollView>
   );
 };
+
+export default AutoScrollCarousel;
