@@ -53,22 +53,22 @@ const HomePage = ({ navigation }) => {
     setCart([]);
     setQuantities({});
   };
- const List = ({ items }) => (
-  <>
-    {items.map((item) => (
-      <View key={4} style={styles.foodItem}>
-        <Image source={{ uri: item.imageUrl }} style={styles.image1} />
-      </View>
-    ))}
-  </>
-);
+  const List = ({ items }) => (
+    <>
+      {items.map((item) => (
+        <View key={4} style={styles.foodItem}>
+          <Image source={{ uri: item.imageUrl }} style={styles.image1} />
+        </View>
+      ))}
+    </>
+  );
 
 
 
   const renderFoodList = (items) => (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       {items.map((item) => (
-        
+
         <View key={item.id} style={styles.foodItem}>
           <Image source={{ uri: item.imageUrl }} style={styles.image1} />
           <Text style={styles.foodName}>{item.dish}</Text>
@@ -114,7 +114,7 @@ const HomePage = ({ navigation }) => {
           backgroundColor: 'white',
           width: '90%',
           padding: 10,
-        
+
           borderRadius: 10,
           marginBottom: 10
         }}
@@ -124,18 +124,19 @@ const HomePage = ({ navigation }) => {
         onChangeText={setSearchQuery}
         onSubmitEditing={handleSearchSubmit}
       />
+      
 
       <ScrollView>
-        <Text style={styles.section}>Main course..</Text>
+        <Text style={styles.section}>Main course</Text>
         {renderFoodList(mainCourse)}
 
-        <Text style={styles.section}>Starters..</Text>
+        <Text style={styles.section}>Starters</Text>
         {renderFoodList(starters)}
 
-        <Text style={styles.section}>Deserts..</Text>
+        <Text style={styles.section}>Deserts</Text>
         {renderFoodList(deserts)}
 
-        <Text style={styles.section}>Milkshakes..</Text>
+        <Text style={styles.section}>Milkshakes</Text>
         {renderFoodList(milkshakes)}
       </ScrollView>
 
@@ -153,13 +154,14 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'black', alignItems: 'center' },
   header: { padding: 20, marginTop: 50, color: 'white', fontSize: 35, fontWeight: 'bold' },
   section: {
+
     color: 'white',
     fontSize: 25,
     fontWeight: 'bold',
     marginTop: 30,
     marginLeft: 20,
     alignSelf: 'flex-start',
-    textDecorationLine: 'underline'
+
   },
   image1: { width: 200, height: 200, marginTop: 20, borderRadius: 20 },
   foodItem: { alignItems: 'center', marginHorizontal: 20 },
