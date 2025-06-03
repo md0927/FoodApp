@@ -42,7 +42,7 @@ const AutoScrollCarousel = () => {
         <Image
           key={idx}
           source={{ uri: item.imageUrl }}
-          style={{ width, height: 200, resizeMode: 'cover', borderRadius: 10 }}
+          style={{ width:350, height: 200,marginLeft:15,marginRight:20, resizeMode: 'cover', borderRadius: 10 }}
         />
       ))}
     </ScrollView>
