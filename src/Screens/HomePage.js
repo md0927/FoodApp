@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import AutoScrollCarousel from './AutoScrollCarousel';
 
-const HomePage = ({ navigation }) => {
+const  HomePage = ({ navigation }) => {
   const [mainCourse, setMainCourse] = useState([]);
   const [starters, setStarters] = useState([]);
   const [deserts, setDeserts] = useState([]);
