@@ -1,0 +1,29 @@
+  
+  [HttpGet("carousel")]
+  public IActionResult GetCarouselImages()
+  {
+      var images = new List<object>(); // Use dynamic/anonymous structure
+
+      using (SqlConnection conn = new SqlConnection(dbhelper.getConnectionString()))
+      {
+          conn.Open();
+
+          // Define the SQL query with IN clause for specific IDs
+          string query = "SELECT Id, image_url FROM Food WHERE Id IN (3, 7, 11, 14)";
+
+          using (SqlCommand cmd = new SqlCommand(query, conn))
+          using (SqlDataReader reader = cmd.ExecuteReader())
+          {
+              while (reader.Read())
+              {
+                  images.Add(new
+                  {
+                      Id = (int)reader["Id"],
+                      ImageUrl = reader["image_url"]?.ToString()
+                  });
+              }
+          }
+      }
+
+      return Ok(images);
+  }

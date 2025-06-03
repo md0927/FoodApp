@@ -1,7 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomePage from '../HomePage';
-
+import
 import CartScreen from '../CartScreen';
 import SearchResultsScreen from '../SearchResultsScreen';
 
