@@ -126,16 +126,16 @@ const HomePage = ({ navigation }) => {
       />
 
       <ScrollView>
-        <Text style={styles.section}>Main course</Text>
+        <Text style={styles.section}>Main course..</Text>
         {renderFoodList(mainCourse)}
 
-        <Text style={styles.section}>Starters</Text>
+        <Text style={styles.section}>Starters..</Text>
         {renderFoodList(starters)}
 
-        <Text style={styles.section}>Deserts</Text>
+        <Text style={styles.section}>Deserts..</Text>
         {renderFoodList(deserts)}
 
-        <Text style={styles.section}>Milkshakes</Text>
+        <Text style={styles.section}>Milkshakes..</Text>
         {renderFoodList(milkshakes)}
       </ScrollView>
 
