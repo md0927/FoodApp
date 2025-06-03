@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-
 import { ScrollView, Dimensions, Image } from 'react-native';
 
 const { width } = Dimensions.get('window');
@@ -7,10 +6,9 @@ const { width } = Dimensions.get('window');
 const AutoScrollCarousel = () => {
   const [images, setImages] = useState([]);
   const scrollRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const currentIndexRef = useRef(0); // keep track of index without triggering re-render
 
   useEffect(() => {
-    // Fetch carousel images from your backend
     fetch('http://dikshi.ddns.net/reacttest/api/Foodorder/carousel')
       .then(res => res.json())
       .then(data => setImages(data))
@@ -18,14 +16,16 @@ const AutoScrollCarousel = () => {
   }, []);
 
   useEffect(() => {
+    if (images.length === 0) return;
+
     const interval = setInterval(() => {
-      const nextIndex = (currentIndex + 1) % images.length;
+      const nextIndex = (currentIndexRef.current + 1) % images.length;
       scrollRef.current?.scrollTo({ x: nextIndex * width, animated: true });
-      setCurrentIndex(nextIndex);
-    }, 1000); // 3-second interval
+      currentIndexRef.current = nextIndex;
+    }, 3000); // 3 seconds
 
     return () => clearInterval(interval);
-  }, [currentIndex, images.length]);
+  }, [images.length]);
 
   if (images.length === 0) return null;
 
@@ -35,8 +35,8 @@ const AutoScrollCarousel = () => {
       pagingEnabled
       showsHorizontalScrollIndicator={false}
       ref={scrollRef}
-      scrollEnabled={false} // disables manual swipe
-      style={{ width, height: 200, marginBottom: 20 }}
+      scrollEnabled={false}
+      style={{ width, height: 500, marginBottom: 20 }}
     >
       {images.map((item, idx) => (
         <Image
