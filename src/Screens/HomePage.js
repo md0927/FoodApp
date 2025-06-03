@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, TextInput, Alert } from 'react-native';
 import axios from 'axios';
 
+import AutoScrollCarousel from './AutoScrollCarousel';
+
 const HomePage = ({ navigation }) => {
   const [mainCourse, setMainCourse] = useState([]);
   const [starters, setStarters] = useState([]);
@@ -124,7 +126,7 @@ const HomePage = ({ navigation }) => {
         onChangeText={setSearchQuery}
         onSubmitEditing={handleSearchSubmit}
       />
-      
+      <AutoScrollCarousel />
 
       <ScrollView>
         <Text style={styles.section}>Main course</Text>
