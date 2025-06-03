@@ -1,60 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import { View, Image, Dimensions, ActivityIndicator, StyleSheet } from 'react-native';
-import Carousel from 'react-native-reanimated-carousel';
-import axios from 'axios';
+import { ScrollView, Dimensions } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
 
 const { width } = Dimensions.get('window');
 
 const AutoScrollCarousel = () => {
   const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const scrollRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    axios.get('http://dikshi.ddns.net/reacttest/api/food/carousel')
-      .then(response => {
-        setImages(response.data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Error loading carousel images:', error);
-        setLoading(false);
-      });
+    // Fetch carousel images from your backend
+    fetch('http://dikshi.ddns.net/reacttest/api/Foodorder/carousel')
+      .then(res => res.json())
+      .then(data => setImages(data))
+      .catch(err => console.error('Carousel fetch error:', err));
   }, []);
 
-  if (loading) {
-    return <ActivityIndicator size="large" style={{ marginTop: 10 }} />;
-  }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const nextIndex = (currentIndex + 1) % images.length;
+      scrollRef.current?.scrollTo({ x: nextIndex * width, animated: true });
+      setCurrentIndex(nextIndex);
+    }, 3000); // 3-second interval
+
+    return () => clearInterval(interval);
+  }, [currentIndex, images.length]);
+
+  if (images.length === 0) return null;
 
   return (
-    <View style={styles.carouselContainer}>
-      <Carousel
-        width={width * 0.9}
-        height={200}
-        autoPlay
-        loop
-        data={images}
-        scrollAnimationDuration={1000}
-        renderItem={({ item }) => (
-          <Image
-            source={{ uri: item.imageUrl }}
-            style={styles.image}
-          />
-        )}
-      />
-    </View>
+    <ScrollView
+      horizontal
+      pagingEnabled
+      showsHorizontalScrollIndicator={false}
+      ref={scrollRef}
+      scrollEnabled={false} // disables manual swipe
+      style={{ width, height: 200, marginBottom: 20 }}
+    >
+      {images.map((item, idx) => (
+        <Image
+          key={idx}
+          source={{ uri: item.imageUrl }}
+          style={{ width, height: 200, resizeMode: 'cover', borderRadius: 10 }}
+        />
+      ))}
+    </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  carouselContainer: {
-    marginVertical: 10,
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 12,
-    resizeMode: 'cover',
-  },
-});
-
-export default AutoScrollCarousel;
