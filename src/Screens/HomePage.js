@@ -130,6 +130,10 @@ const HomePage = ({ navigation }) => {
       <AutoScrollCarousel />
 
       <ScrollView>
+        
+
+
+
         <Text style={styles.section}>Main course</Text>
         {renderFoodList(mainCourse)}
 
