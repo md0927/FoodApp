@@ -9,12 +9,12 @@ export default function LoginScreen() {
 
   const handleLogin = () => {
     // You can validate email/password here
-    navigation.navigate('HomePage');
+    navigation.navigate('Home');
   };
 
   const handleGoogleLogin = () => {
     // Google auth logic goes here
-    navigation.navigate('HomePage');
+    navigation.navigate('Home');
   };
 
   return (
